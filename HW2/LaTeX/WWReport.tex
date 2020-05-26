@@ -1,0 +1,447 @@
+%% ---------------------------------------------------
+%% Notice that we use the "report" class instead of "article"
+%% ---------------------------------------------------
+\documentclass{report}
+\usepackage{634format}
+\title{Report for ML Exercises }
+
+\author{Wei-Ling Wang}
+\date{\today}
+
+
+
+%% ---------------------------------------------------
+%% enumerate 
+%% ---------------------------------------------------
+\usepackage{enumerate}
+
+%% ---------------------------------------------------
+%% listings is used for including our source code in reports
+%% ---------------------------------------------------
+\usepackage{listings}
+\usepackage{textcomp}
+
+%% ---------------------------------------------------
+%% Packages for math environments
+%% ---------------------------------------------------
+\usepackage{amsmath}
+
+%% ---------------------------------------------------
+%% Packages for URLs and hotlinks in the table of contents
+%% and symbolic cross references using \ref
+%% ---------------------------------------------------
+\usepackage{hyperref}
+
+%% ---------------------------------------------------
+%% Packages for using HOL-generated macros and displays
+%% ---------------------------------------------------
+\usepackage{holtex}
+\usepackage{holtexbasic}
+\input{commands}
+
+\begin{document}
+
+%% --------------------------------------------------- the listings
+%% parameter "language" is set to "ML"
+%% ---------------------------------------------------
+\lstset{language=ML}
+
+\maketitle{}
+
+\begin{abstract}
+
+  This article is mainly about the HOL excercise. By learning the video given by the teacher, I have mastered the basic use of functions of ML and the expression of variables, including int, list and string, and learned Logic Semantics. At the same time, I used emacs to compile the report and write the source code, which made me more familiar with the syntax of LaTaX.
+  \begin{itemize}
+  \item Problem statement
+  \item Relevant code
+  \item Results from running ML code or HOL proofs
+  \end{itemize}
+
+  For each problem or exercise-oriented chapter in the main body of
+  the report there is a corresponding chapter in the Appendix containing the
+  source code in ML. This source code is not pasted into the Appendix,
+  rather it is input directly from the source code file itself. This
+  means changes in source code are easily captured in the report by
+  recompiling the report in \LaTeX{}. \\
+
+
+  We introduce the use of style files and packages. Specifically, we
+  use:
+  \begin{itemize}
+  \item A style file for the course, \textit{634format.sty}
+  \item The \textit{listings} package for displaying and inputting ML
+    source code
+  \item HOL style files and commands to display interactive ML/HOL
+    sessions
+  \end{itemize}
+ Finally, we show how to:
+  \begin{itemize}
+  \item Easily generate a table of contents for the report
+  \item Refer to chapter and section labels in our report
+  \end{itemize}
+\end{abstract}
+
+\begin{acknowledgments}
+  I did this project by myself. I tried to write the HOL program for the first time by studying the video given by the teacher.
+\end{acknowledgments}
+
+\tableofcontents{}
+
+\chapter{Executive Summary}
+\label{cha:executive-summary}
+
+\textbf{All requirements for this project are satisfied.}
+Specifically,
+\begin{description}
+\item[Report Contents] \ \\
+  Our report has the following content:
+  \begin{enumerate}[{}]
+  \item Chapter~\ref{cha:executive-summary}: Executive Summary
+  \item Chapter~\ref{cha:exercise-2.5.1}: Exercise 2.5.1
+    \begin{enumerate}[{}]
+    \item Section~\ref{sec:problem-statement}: Problem Statement
+    \item Section~\ref{sec:test-cases}: Test Cases
+    \item Section~\ref{sec:relevant-code}: Relevant Code
+    \item Section~\ref{sec:execution-transc}: Execution Transcripts
+    \end{enumerate}
+  \item Chapter~\ref{cha:exercise-3.4.1}: Source Code for Sample Exercise
+    \begin{enumerate}[{}]
+    \item Section~\ref{sec:problem-statement-1}: Problem Statement
+    \item Section~\ref{sec:relevant-code-1}: Relevant Code
+    \item Section~\ref{sec:execution-transc-1}: Execution Transcripts
+    \end{enumerate}
+  \item Chapter~\ref{cha:exercise-3.4.2}: Exercise 3.4.2
+    \begin{enumerate}[{}]
+    \item Section~\ref{sec:problem-statement-2}: Problem Statement
+    \item Section~\ref{sec:relevant-code-2}: Relevant Code
+    \item Section~\ref{sec:execution-transc-2}: Execution Transcripts
+    \end{enumerate}
+  \item Appendix~\ref{cha:source-code-exercise}: Source Code for
+    Exercise 2.5.1
+  \item Appendix~\ref{cha:source-code-exercise-1}: Source Code for
+    Exercise 3.4.1
+  \item Appendix~\ref{cha:source-code-exercise-2}: Source Code for
+    Exercise 3.4.2
+  \end{enumerate}
+
+\item[Reproducibility in ML and \LaTeX{}] \ \\
+  The ML and \LaTeX{} source files compile with no errors.
+\end{description}
+
+\chapter{Exercise 2.5.1}
+\label{cha:exercise-2.5.1}
+
+\section{Problem Statement}
+\label{sec:problem-statement}
+
+\subsection{Function to implement}
+\label{sec:function-implement}
+
+We are required to execute the following function in ML:\\
+\begin{align*}
+  timesPlus \;x\;y \;=\; ( \;x\times y\;,\;x+y\;)
+\end{align*}
+
+\subsection{Test cases}
+\label{sec:test-cases}
+The required tests for \emph{timesPlus} are as follows:
+\begin{lstlisting}[frame=TBLR](*gives frame as two lines tblr*)
+(* Test Cases specified in the requirements *)
+
+timesPlus 100   27; 
+timesPlus  10   26; 
+timesPlus   1   25; 
+timesPlus   2   24;
+timesPlus  30   23; 
+timesPlus  50  200;
+\end{lstlisting}
+
+\section{Relevant Code}
+\label{sec:relevant-code}
+
+The following code runs the function definition using
+\textit{fun} in ML, and \textit{currying}, i.e., defining functions
+with multiple arguments as a sequence of functions. This supports
+partial evaluation.
+
+\lstset{frameround=tftf}%%make edge of the frame round. f=false t=true..these are to set which all corners you want rounded.
+%% frame gives the frame or border. Uppercase=2 and lower case=1, t=top,
+%% r=right, B=below, L=left
+\begin{lstlisting}[frame=trbl]
+  fun timesPlus x y = ( x * y , x + y )
+\end{lstlisting}
+
+\section{Execution Transcripts}
+\label{sec:execution-transc}
+
+\setcounter{sessioncount}{0}
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> timesPlus 100 27;
+val it = (2700, 127): int * int 
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> timesPlus 10 26;
+val it = (260, 36): int * int 
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> timesPlus 1 25;
+val it = (25, 26): int * int 
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> timesPlus 2 24;
+val it = (48, 26): int * int 
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> timesPlus 30 23;
+val it = (690, 53): int * int
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> timesPlus 50 200;
+val it = (10000, 250): int * int 
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+\chapter{Exercise 3.4.1}
+\label{cha:exercise-3.4.1}
+
+\section{Problem Statement}
+\label{sec:problem-statement-1}
+We are to devise ML expressions for the following tasks where we have 
+values and require to assign them to variables as specified:
+\begin{enumerate}[{1.}] %%[] specifies what to enumerate - alphabets or numbers
+\item Devise a list of pairs [(0,''Alice''), (1,''Bob''),
+  (3,''Carol''), (4,''Dan'')] and assign it the name listA
+\item Using listA and pattern matching, create the following value
+  assignments: elB has the value (0,''Alice'') and listB has the value
+  [(1,''Bob''), (3,''Carol''), (4,''Dan'')]
+\item Using elB, listB and pattern matching, create the following
+  value assignments: elC1 has the value 0, elC2 has the value
+  ``Alice'', elC3 has the value (1,''Bob''), elC4 has the value
+  (3,''Carol''), and elC5 has the value (4,''Dan'').
+\end{enumerate}
+
+\section{Relevant Code}
+\label{sec:relevant-code-1}
+
+The following code uses value declarations and pattern
+matching on tuples and lists.
+
+\lstset{frameround=tftf}
+\begin{lstlisting}[frame=trbl]
+val listA = [(0,"Alice"),(1,"Bob"),(3,"Carol"),(4,"Dan")]; 
+val (elB :: listB) = listA; 
+val (elC1, elC2) = elB; 
+val (elC3 :: (elC4 :: (elC5 :: []))) = listB;
+\end{lstlisting}
+
+\section{Execution Transcripts}
+\label{sec:execution-transc-1}
+
+\setcounter{sessioncount}{0}
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> val listA = [(0,"Alice"), (1,"Bob"), (3,"Carol"), (4,"Dan")];
+val listA = [(0, "Alice"), (1, "Bob"), (3, "Carol"), (4, "Dan")] : (int * string) list
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> val (elB :: listB) = listA;
+val elB = (0, "Alice"): int * string
+val listB = [(1, "Bob"), (3, "Carol"), (4, "Dan")] : (int * string) list
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> val (elC1, elC2) = elB;
+val elC1 = 0: int
+val elC2 = "Alice": string
+> val (elC3 :: (elC4 :: (elC5 :: []))) = listB;
+val elC3 = (1, "Bob"): int * string
+val elC4 = (3, "Carol"): int * string
+val elC5 = (4, "Dan"): int * string
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+\chapter{Exercise 3.4.2}
+\label{cha:exercise-3.4.2}
+
+\section{Problem Statement}
+\label{sec:problem-statement-2}
+
+We are to evaluate the following assignments in the
+order in which they appear in HOL, explain the errors that HOL
+detects using comments and store the results in ex-3-4-2.trans file:\\
+\begin{enumerate}[{1.}]
+\item val (x1, x2, x3) = (1, true, "Alice");
+\item val pair1 = (x1, x3);
+\item val list1 = [0, x1, 2];
+\item val list2 = [x2, x1];
+\item val list3 = (1 :: [x3]);
+\end{enumerate}
+
+\section{Relevant Code}
+\label{sec:relevant-code-2}
+
+The following code uses value declarations and pattern
+matching on tuples. Lists are given as part of the problem statement
+
+\lstset{frameround=tftf}
+\begin{lstlisting}[frame=trbl]
+val (x1, x2, x3) = (1, true, "Alice");
+val pair1 = (x1, x3);
+val list1 = [0, x1, 2];
+val list2 = [x2, x1];
+val list3 = (1 :: [x3]);
+\end{lstlisting}
+
+\section{Execution Transcripts}
+\label{sec:execution-transc-2}
+
+\setcounter{sessioncount}{0}
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> val (x1, x2, x3) = (1, true, "Alice");
+val x1 = 1: int
+val x2 = true: bool
+val x3 = "Alice": string
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> val pair1 = (x1, x3);
+val pair1 = (1, "Alice"): int * string
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> val list1 = [0, x1, 2];
+val list1 = [0, 1, 2]: int list
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> val list2 = [x2, x1];
+poly: : error: Elements in a list have different types.
+   Item 1: x2 : bool
+   Item 2: x1 : int
+   Reason:
+      Can't unify bool (*In Basis*) with int (*In Basis*)
+         (Different type constructors)
+Found near [x2, x1]
+Static Errors
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+\begin{session}
+\begin{scriptsize}
+\begin{verbatim}
+
+> val list3 = (1 :: [x3]);
+poly: : error: Type error in function application.
+   Function: :: : int * int list -> int list
+   Argument: (1, [x3]) : int * string list
+   Reason:
+      Can't unify int (*In Basis*) with string (*In Basis*)
+         (Different type constructors)
+Found near (1 :: [x3])
+Static Errors
+\end{verbatim}
+\end{scriptsize}
+\end{session}
+
+
+%% ------------------------------------------
+%% Change to letters for appendix
+%% ------------------------------------------
+
+%% ------------------------------------------
+%% this restarts the section numbering
+%% ------------------------------------------
+\appendix{} 
+
+
+%% ------------------------------------------
+% label using capital letters
+%% ------------------------------------------
+\renewcommand{\thechapter}{\Alph{chapter}}
+
+\chapter{Source Code for Exercise 2.5.1}
+\label{cha:source-code-exercise}
+
+The following code is from \textit{ex-2-5-1.sml}
+\lstinputlisting{../ML/ex-2-5-1.sml}
+
+\chapter{Source Code for Exercise 3.4.1}
+\label{cha:source-code-exercise-1}
+
+The following code is from \textit{ex-3-4-1.sml}
+\lstinputlisting{../ML/ex-3-4-1.sml}
+
+\chapter{Source Code for Exercise 3.4.2}
+\label{cha:source-code-exercise-2}
+
+The following code is from \textit{ex-3-4-2.sml}
+\lstinputlisting{../ML/ex-3-4-2.sml}
+
+\end{document}
